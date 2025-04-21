@@ -1,26 +1,14 @@
-# Use a Maven image to build the app
-FROM maven:3.9.3-eclipse-temurin-17 as builder
+# Use OpenJDK base image
+FROM openjdk:17
 
 # Set working directory
 WORKDIR /app
 
-# Copy the pom and source code
-COPY pom.xml .
-COPY src ./src
+# Copy the Java file
+COPY HelloWorld.java .
 
-# Package the app
-RUN mvn clean package -DskipTests
+# Compile the Java file
+RUN javac HelloWorld.java
 
-# ----------- Runtime stage ------------
-FROM eclipse-temurin:17-jdk-alpine
-
-WORKDIR /app
-
-# Copy the jar from the builder stage
-COPY --from=builder /app/target/*.jar app.jar
-
-# Expose port
-EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the program
+CMD ["java", "HelloWorld"]
