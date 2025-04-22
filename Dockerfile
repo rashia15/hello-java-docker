@@ -10,5 +10,7 @@ COPY HelloWorld.java .
 # Compile the Java file
 RUN javac HelloWorld.java
 
+EXPOSE 8000
+
 # Run the program
 CMD ["java", "HelloWorld"]
