@@ -12,6 +12,8 @@ public class HelloWorld {
         server.setExecutor(null);
         server.start();
         System.out.println("Server started on port 8081");
+        server.stop(5);
+
     }
 
     static class MyHandler implements HttpHandler {
